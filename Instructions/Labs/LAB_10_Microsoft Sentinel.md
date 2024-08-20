@@ -5,19 +5,20 @@ lab:
 ---
 
 # Lab 10: Microsoft Sentinel
+
 # Student lab manual
 
 ## Lab scenario
 
-**Note:** **Azure Sentinel** is renamed to **Microsoft Sentinel** 
+**Note:** **Azure Sentinel** is renamed to **Microsoft Sentinel**
 
 You have been asked to create a proof of concept of Microsoft Sentinel-based threat detection and response. Specifically, you want to:
 
 - Start collecting data from Azure Activity and Microsoft Defender for Cloud.
-- Add built in and custom alerts 
+- Add built in and custom alerts
 - Review how Playbooks can be used to automate a response to an incident.
 
-> For all the resources in this lab, we are using the **East US** region. Verify with your instructor this is the region to use for class. 
+> For all the resources in this lab, we are using the **East US** region. Verify with your instructor this is the region to use for class.
 
 ## Lab objectives
 
@@ -31,7 +32,7 @@ In this lab, you will complete the following exercise:
 
 ## Instructions
 
-## Lab files:
+## Lab files
 
 - **\\Allfiles\\Labs\\15\\changeincidentseverity.json**
 
@@ -43,14 +44,14 @@ In this exercise, you will complete the following tasks:
 
 - Task 1: On-board Microsoft Sentinel
 - Task 2: Connect Azure Activity to Sentinel
-- Task 3: Create a rule that uses the Azure Activity data connector. 
+- Task 3: Create a rule that uses the Azure Activity data connector.
 - Task 4: Create a playbook
 - Task 5: Create a custom alert and configure the playbook as an automated response.
 - Task 6: Invoke an incident and review the associated actions.
 
 #### Task 1: On-board Azure Sentinel
 
-In this task, you will on-board Microsoft Sentinel and connect the Log Analytics workspace. 
+In this task, you will on-board Microsoft Sentinel and connect the Log Analytics workspace.
 
 1. Sign-in to the Azure portal **`https://portal.azure.com/`**.
 
@@ -65,8 +66,8 @@ In this task, you will on-board Microsoft Sentinel and connect the Log Analytics
 4. On the **Add Microsoft Sentinel to a workspace** blade, select the Log Analytics workspace you created in the Azure Monitor lab and click **Add**.
 
     >**Note**: Microsoft Sentinel has very specific requirements for workspaces. For example, workspaces created by Microsoft Defender for Cloud can not be used. Read more at [Quickstart: On-board Azure Sentinel](https://docs.microsoft.com/en-us/azure/sentinel/quickstart-onboard)
-	
-#### Task 2: Configure Microsoft Sentinel to use the Azure Activity data connector. 
+ 
+#### Task 2: Configure Microsoft Sentinel to use the Azure Activity data connector
 
 In this task, you will configure Sentinel to use the Azure Activity data connector.  
 
@@ -102,29 +103,29 @@ In this task, you will configure Sentinel to use the Azure Activity data connect
 
     >**Note**: It may take over 15 minutes before the Status shows "Connected" and the graph displays Data received.
 
-#### Task 3: Create a rule that uses the Azure Activity data connector. 
+#### Task 3: Create a rule that uses the Azure Activity data connector
 
-In this task, you will review and create a rule that uses the Azure Activity data connector. 
+In this task, you will review and create a rule that uses the Azure Activity data connector.
 
-1. On the **Microsoft Sentinel \| Configuration** blade, click **Analytics**. 
+1. On the **Microsoft Sentinel \| Configuration** blade, click **Analytics**.
 
-2. On the **Microsoft Sentinel \| Analytics** blade, click the **Rule templates** tab. 
+2. On the **Microsoft Sentinel \| Analytics** blade, click the **Rule templates** tab.
 
     >**Note**: Review the types of rules you can create. Each rule is associated with a specific Data Source.
 
 3. In the listing of rule templates, type **Suspicious** into the search bar form and click the **Suspicious number of resource creation or deployment** entry associated with the **Azure Activity** data source. And then, in the pane displaying the rule template properties, click **Create rule** (scroll to the right of the page if needed).
 
-    >**Note**: This rule has the medium severity. 
+    >**Note**: This rule has the medium severity.
 
 4. On the **General** tab of the **Analytics rule wizard - Create a new Scheduled rule** blade, accept the default settings and click **Next: Set rule logic >**.
 
 5. On the **Set rule logic** tab of the **Analytics rule wizard - Create a new Scheduled rule** blade, accept the default settings and click **Next: Incident settings (Preview) >**.
 
-6. On the **Incident settings** tab of the **Analytics rule wizard - Create a new Scheduled rule** blade, accept the default settings and click **Next: Automated response >**. 
+6. On the **Incident settings** tab of the **Analytics rule wizard - Create a new Scheduled rule** blade, accept the default settings and click **Next: Automated response >**.
 
     >**Note**: This is where you can add a playbook, implemented as a Logic App, to a rule to automate the remediation of an issue.
 
-7. On the **Automated response** tab of the **Analytics rule wizard - Create a new Scheduled rule** blade, accept the default settings and click **Next: Review and create >**. 
+7. On the **Automated response** tab of the **Analytics rule wizard - Create a new Scheduled rule** blade, accept the default settings and click **Next: Review and create >**.
 
 8. On the **Review and create** tab of the **Analytics rule wizard - Create a new Scheduled rule** blade, click **Save**.
 
@@ -132,7 +133,7 @@ In this task, you will review and create a rule that uses the Azure Activity dat
 
 #### Task 4: Create a playbook
 
-In this task, you will create a playbook. A security playbook is a collection of tasks that can be invoked by Microsoft Sentinel in response to an alert. 
+In this task, you will create a playbook. A security playbook is a collection of tasks that can be invoked by Microsoft Sentinel in response to an alert.
 
 1. In the Azure portal, in the **Search resources, services, and docs** text box at the top of the Azure portal page, type **Deploy a custom template** and press the **Enter** key.
 
@@ -188,7 +189,7 @@ In this task, you will create a playbook. A security playbook is a collection of
 
 2. On the the **Microsoft Sentinel \| Overview** blade, in the **Configuration** section, click **Analytics**.
 
-3. On the **Microsoft Sentinel \| Analytics** blade, click **+ Create** and, in the drop-down menu, click **Scheduled query rule**. 
+3. On the **Microsoft Sentinel \| Analytics** blade, click **+ Create** and, in the drop-down menu, click **Scheduled query rule**.
 
 4. On the **General** tab of the **Analytics rule wizard - Create a new Scheduled rule** blade, specify the following settings (leave others with their default values):
 
@@ -199,7 +200,7 @@ In this task, you will create a playbook. A security playbook is a collection of
 
 5. Click **Next: Set rule logic >**.
 
-6. On the **Set rule logic** tab of the **Analytics rule wizard - Create a new Scheduled rule** blade, in the **Rule query** text box, paste the following rule query. 
+6. On the **Set rule logic** tab of the **Analytics rule wizard - Create a new Scheduled rule** blade, in the **Rule query** text box, paste the following rule query.
 
     ```
     AzureActivity
@@ -209,14 +210,13 @@ In this task, you will create a playbook. A security playbook is a collection of
 
     >**Note**: This rule identifies removal of Just-in-time VM access policies.
 
-    >**Note** if you receive a parse error, intellisense may have added values to your query. Ensure the query matches otherwise paste the query into notepad and then from notepad to the rule query. 
-
+    >**Note** if you receive a parse error, intellisense may have added values to your query. Ensure the query matches otherwise paste the query into notepad and then from notepad to the rule query.
 
 7. On the **Set rule logic** tab of the **Analytics rule wizard - Create a new Scheduled rule** blade, in the **Query scheduling** section, set the **Run query every** to **5 Minutes**.
 
 8. On the **Set rule logic** tab of the **Analytics rule wizard - Create a new Scheduled rule** blade, accept the default values of the remaining settings and click **Next: Incident settings >**.
 
-9. On the **Incident settings** tab of the **Analytics rule wizard - Create a new Scheduled rule** blade, accept the default settings and click **Next: Automated response >**. 
+9. On the **Incident settings** tab of the **Analytics rule wizard - Create a new Scheduled rule** blade, accept the default settings and click **Next: Automated response >**.
 
 10. On the **Automated response** tab of the **Analytic rule wizard - Create a new Scheduled rule** blade, under **Automation rules**, click **+ Add new**.
 
@@ -224,17 +224,17 @@ In this task, you will create a playbook. A security playbook is a collection of
 
 12. In the **Create new automation rule** window, under **Actions**, read the note and then click **Manage playbook permissions**. On the **Manage permissions** window, select the checkbox next to the previously created **Resource group AZ500LAB1314151** and then click **Apply**.
 
-13.  In the **Create new automation rule** window, under **Actions**, click the second drop-down menu and select the **Change-Incident-Severity** logic app. On the **Create new automation rule** window, click **Apply**.
+13. In the **Create new automation rule** window, under **Actions**, click the second drop-down menu and select the **Change-Incident-Severity** logic app. On the **Create new automation rule** window, click **Apply**.
 
 14. On the **Automated response** tab of the **Analytic rule wizard - Create a new Scheduled rule** blade, click **Next: Review and create >** and click **Save**
 
     >**Note**: You now have a new active rule called **Playbook Demo**. If an event identified by the rue logic occurs, it will result in a medium severity alert, which will generate a corresponding incident.
 
-#### Task 6: Invoke an incident and review the associated actions.
+#### Task 6: Invoke an incident and review the associated actions
 
 1. In the Azure portal, navigate to the **Microsoft Defender for Cloud \| Overview** blade.
 
-    >**Note**: Check your secure score. By now it should have updated. 
+    >**Note**: Check your secure score. By now it should have updated.
 
 2. On the **Microsoft Defender for Cloud \| Overview** blade, click **Workload protections** under **Cloud Security** in the left navigation.
 
@@ -246,7 +246,7 @@ In this task, you will create a playbook. A security playbook is a collection of
 
 5. In the Azure portal, in the **Search resources, services, and docs** text box at the top of the Azure portal page, type **Activity log** and press the **Enter** key.
 
-6. Navigate to the **Activity log** blade, note an **Delete JIT Network Access Policies** entry. 
+6. Navigate to the **Activity log** blade, note an **Delete JIT Network Access Policies** entry.
 
     >**Note**: This may take a few minutes to appear. **Refresh** the page if it does not appear.
 
@@ -260,7 +260,7 @@ In this task, you will create a playbook. A security playbook is a collection of
 
 10. Verify that the blade displays an incident with either medium or high severity level.
 
-    >**Note**: It can take up to 5 minutes for the incident to appear on the **Microsoft Sentinel \| Incidents** blade. 
+    >**Note**: It can take up to 5 minutes for the incident to appear on the **Microsoft Sentinel \| Incidents** blade.
 
     >**Note**: Review the **Microsoft Sentinel \| Playbooks** blade. You will find there the count of succesfull and failed runs.
 
@@ -270,7 +270,7 @@ In this task, you will create a playbook. A security playbook is a collection of
 
 **Clean up resources**
 
-> Remember to remove any newly created Azure resources that you no longer use. Removing unused resources ensures you will not incur unexpected costs. 
+> Remember to remove any newly created Azure resources that you no longer use. Removing unused resources ensures you will not incur unexpected costs.
 
 1. In the Azure portal, open the Cloud Shell by clicking the first icon in the top right of the Azure Portal. If prompted, click **PowerShell** and **Create storage**.
 
@@ -281,4 +281,5 @@ In this task, you will create a playbook. A security playbook is a collection of
     ```powershell
     Remove-AzResourceGroup -Name "AZ500LAB131415" -Force -AsJob
     ```
+
 4. Close the **Cloud Shell** pane.
